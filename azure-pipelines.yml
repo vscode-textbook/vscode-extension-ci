@@ -1,0 +1,99 @@
+trigger:
+  branches:
+    include:
+    - master
+    #- release/*
+    #- refs/tags/{tagname}
+    #exclude:
+    #- releases/old*
+#pr:
+#  branches:
+#    include:
+#    - '*'
+
+# A single stage - test the extension 
+jobs:
+- job: 'Platform'
+  strategy:
+    maxParallel: 3
+    matrix:
+      linux:
+        imageName: 'ubuntu-16.04'
+        nodeVersion: '8.x'
+      mac:
+        imageName: 'macOS-10.13'
+        nodeVersion: '8.x'
+      windows:
+        imageName: 'VS2017-Win2016'
+        nodeVersion: '8.x'
+  #strategy:
+  #  maxParallel: 3
+  #  matrix:
+  #    linux_node8:
+  #      imageName: 'ubuntu-16.04'
+  #      nodeVersion: '8.x'
+  #    linux_node10:
+  #      imageName: 'ubuntu-16.04'
+  #      nodeVersion: '10.x'
+  #    mac_node8:
+  #      imageName: 'macOS-10.13'
+  #      nodeVersion: '8.x'
+  #    mac_node10:
+  #      imageName: 'macOS-10.13'
+  #      nodeVersion: '10.x'
+  #    windows_node8:
+  #      imageName: 'VS2017-Win2016'
+  #      nodeVersion: '8.x'
+  #    windows_node10:
+  #      imageName: 'VS2017-Win2016'
+  #      nodeVersion: '10.x'
+
+  pool:
+    vmImage: $(imageName)
+
+  steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js $(nodeVersion)'
+    inputs:
+      versionSpec: $(nodeVersion)
+
+  - task: Npm@1
+    displayName: 'Install dependencies'
+    inputs:
+      verbose: false
+      command: install
+
+  # Starts a process that allows the vscode test environment to run (Only for Linux)
+  - bash: |
+      /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+      echo ">>> Started xvfb"
+    displayName: 'Start xvfb'
+    condition: and(succeeded(), eq(variables['Agent.OS'], 'Linux'))
+
+  - task: Npm@1
+    displayName: 'Run Tests'
+    inputs:
+      verbose: false
+      command: custom
+      customCommand: 'run test'
+    env:
+      DISPLAY: ':99.0' # Only necessary for linux tests
+
+
+# A single stage - test the extension 
+#jobs:
+#- job: Windows
+#  pool:
+#    vmImage: VS2017-Win2016
+#  steps:
+#  - template: common-pipelines.yml
+#- job: Linux
+#  pool:
+#    vmImage: ubuntu-16.04
+#  steps:
+#  - template: common-pipelines.yml
+#- job: macOS
+#  pool:
+#    vmImage: macOS-10.13
+#  steps:
+#  - template: common-pipelines.yml

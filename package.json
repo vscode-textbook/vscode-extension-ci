@@ -1,0 +1,67 @@
+{
+  "name": "sample-tests",
+  "displayName": "sample-tests",
+  "description": "Sample Continuous Integration (CI) tests for VS Code extension",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.43.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:sampletests.command1",
+    "onCommand:sampletests.command2",
+    "onCommand:sampletests.command3",
+    "onCommand:sampletests.command4",
+    "onCommand:sampletests.command5"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sampletests.command1",
+        "title": "Commands1",
+        "category": "SampleTests"
+      },
+      {
+        "command": "sampletests.command2",
+        "title": "Commands2",
+        "category": "SampleTests"
+      },
+      {
+        "command": "sampletests.command3",
+        "title": "Commands3",
+        "category": "SampleTests"
+      },
+      {
+        "command": "sampletests.command4",
+        "title": "Commands4",
+        "category": "SampleTests"
+      },
+      {
+        "command": "sampletests.command5",
+        "title": "Commands5",
+        "category": "SampleTests"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.43.0",
+    "glob": "^7.1.5",
+    "mocha": "^6.2.2",
+    "typescript": "^3.6.4",
+    "tslint": "^5.20.0",
+    "vscode-test": "^1.2.2"
+  }
+}
