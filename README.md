@@ -1,5 +1,5 @@
 # vscode-extension-ci
-Sample Continuous Integration (CI) tests repository for VS Code extension
+VS Code Textbook Part3 - Sample Continuous Integration (CI) Repository for VS Code extension
 
 | CI | Status Badge | 
 |--- | --- |
