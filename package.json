@@ -60,8 +60,10 @@
     "@types/vscode": "^1.43.0",
     "glob": "^7.1.5",
     "mocha": "^10.2.0",
-    "typescript": "3.6.4",
     "tslint": "^5.20.0",
-    "vscode-test": "^1.2.2"
+    "typescript": "3.6.4"
+  },
+  "dependencies": {
+    "@vscode/test-electron": "^2.2.3"
   }
 }
