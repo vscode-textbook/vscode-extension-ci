@@ -7,7 +7,9 @@ export function run(): Promise<void> {
 	const mocha = new Mocha({
 		ui: 'tdd',
 	});
-	mocha.useColors(true);
+	// mocha.useColors is no longer supported. Instead use mocha.options.color
+	// https://stackoverflow.com/questions/65521037/nodejs-expressjs-webpack-error-typeerror-mocha-usecolors-is-not-a-function-a
+	mocha.options.color = true;
 
 	const testsRoot = path.resolve(__dirname, '..');
 
