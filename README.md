@@ -23,12 +23,12 @@ jobs:
       max-parallel: 3
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        node-version: [8.x]
+        node-version: [16]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
