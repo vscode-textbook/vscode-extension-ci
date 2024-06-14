@@ -1,5 +1,6 @@
-# vscode-extension-ci
-VS Code Textbook Part3 - Sample Continuous Integration (CI) Repository for VS Code extension
+# VS Code拡張機能のCIテスト用リポジトリ
+
+これはプログラマーのためのVisual Studio Codeの教科書 (`初版`) - Chapter13 のVS Code拡張機能の継続的インテーグレーション(CI)テスト用のリポジトリです。
 
 | CI | Status Badge |
 |--- | --- |
